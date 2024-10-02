@@ -1,20 +1,19 @@
-// Mark the file as a Client Component
-'use client';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
-import { ThemeProvider } from '@mui/material/styles';
-import { Roboto } from 'next/font/google';
-import theme from '../theme';
-import { Provider } from 'react-redux';
-import './globals.css';
-import store from '@/redux/store';
+"use client";
+import Footer from "@/components/footer/Footer";
+import Header from "@/components/header/Header";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import { ThemeProvider } from "@mui/material/styles";
+import { Roboto } from "next/font/google";
+import theme from "../theme";
+import { Provider } from "react-redux";
+import "./globals.css";
+import store from "./store/store";
 
 const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto',
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto",
 });
 
 export default function RootLayout({
@@ -29,8 +28,8 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <Provider store={store}>
               <Header />
-              {children}
-              <Footer />
+              <main>{children}</main>
+              <Footer /> {/* Footer will stay at the bottom */}
             </Provider>
           </ThemeProvider>
         </AppRouterCacheProvider>
