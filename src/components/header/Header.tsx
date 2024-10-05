@@ -26,6 +26,10 @@ const Header: React.FC = () => {
     setAnchorEl(null);
   };
 
+  const handleCartClick = () => {
+    window.location.href = "/cart"; // Redirect to the cart page
+  };
+
   return (
     <AppBar position="static" color="transparent" elevation={0}>
       <Toolbar
@@ -87,7 +91,8 @@ const Header: React.FC = () => {
             </Typography>
           </IconButton>
 
-          <IconButton>
+          {/* ShoppingCartIcon without conditional rendering */}
+          <IconButton onClick={handleCartClick}>
             <Badge badgeContent={2} color="secondary">
               <ShoppingCartIcon />
             </Badge>
