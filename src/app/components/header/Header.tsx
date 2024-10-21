@@ -148,11 +148,17 @@ const Header: React.FC = () => {
           </IconButton>
 
           {/* Shopping Cart Icon */}
-          <IconButton onClick={handleCartClick}>
-            <Badge badgeContent={2} color="secondary">
-              <ShoppingCartIcon />
-            </Badge>
-          </IconButton>
+          <Link
+            href="/cart"
+            underline="none"
+            sx={{ display: 'flex', alignItems: 'center' }}
+          >
+            <IconButton onClick={handleCartClick}>
+              <Badge badgeContent={2} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
+          </Link>
 
           {/* Search Icon Button */}
           <IconButton sx={{ marginRight: -5 }} onClick={handleSearchClick}>

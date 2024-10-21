@@ -5,7 +5,13 @@ import {
   Typography,
   Grid,
   Box,
+  IconButton,
+  Tooltip,
 } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import VisibilityIcon from '@mui/icons-material/Visibility'; // Import the Visibility icon
+import { useState } from 'react';
 
 interface ProductItemProps {
   id: number;
@@ -24,24 +30,30 @@ const ProductItem = ({
   discount,
   imageUrl,
 }: ProductItemProps) => {
+  const [hovered, setHovered] = useState(false);
+
   return (
     <Grid item xs={12} sm={6} md={3} key={id}>
       <Card
         sx={{
-          display: 'flex', // Flexbox layout
-          flexDirection: 'column', // Column direction
-          alignItems: 'center', // Center elements horizontally
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          position: 'relative', // Important for positioning hover icons
+          transition: '0.3s', // Smooth transition for hover effects
         }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
         <Box sx={{ maxWidth: 300, margin: 5 }}>
           <CardMedia
             component="img"
             sx={{
-              width: '100%', // Let the image take full width of the container
-              height: 'auto', // Maintain aspect ratio
-              objectFit: 'contain', // Ensure the entire image fits within the container
+              width: '100%',
+              height: 'auto',
+              objectFit: 'contain',
             }}
-            image={imageUrl} // Replace with your image URL
+            image={imageUrl}
             alt={name}
           />
         </Box>
@@ -71,6 +83,41 @@ const ProductItem = ({
             </Typography>
           </Typography>
         </CardContent>
+
+        {/* Icons container */}
+        {hovered && (
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              display: 'flex',
+              backgroundColor: '#F1F3F4',
+              width: '80%',
+              height: '80%',
+              gap: 1,
+              transform: 'translate(-50%, -50%)',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Tooltip title="Add to favorites">
+              <IconButton sx={{ color: '#FB7181' }}>
+                <FavoriteIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Add to cart">
+              <IconButton sx={{ color: '#40BFFF' }}>
+                <ShoppingCartIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Xem chi tiết">
+              <IconButton sx={{ color: '#40BFFF' }}>
+                <VisibilityIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        )}
       </Card>
     </Grid>
   );
