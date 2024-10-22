@@ -9,9 +9,11 @@ import {
   Tooltip,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility'; // Import the Visibility icon
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface ProductItemProps {
   id: number;
@@ -30,7 +32,18 @@ const ProductItem = ({
   discount,
   imageUrl,
 }: ProductItemProps) => {
+  const router = useRouter();
   const [hovered, setHovered] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteToggle = () => {
+    setIsFavorite((prev) => !prev);
+  };
+
+  const onNavigateDetail = () => {
+    const url = `/product-detail?link=${imageUrl}`;
+    router.push(url);
+  };
 
   return (
     <Grid item xs={12} sm={6} md={3} key={id}>
@@ -101,17 +114,21 @@ const ProductItem = ({
               justifyContent: 'center',
             }}
           >
-            <Tooltip title="Add to favorites">
-              <IconButton sx={{ color: '#FB7181' }}>
-                <FavoriteIcon />
+            <Tooltip title={isFavorite ? 'Bỏ thích' : 'Yêu thích'}>
+              <IconButton onClick={handleFavoriteToggle}>
+                {isFavorite ? (
+                  <FavoriteIcon color="error" />
+                ) : (
+                  <FavoriteBorderIcon sx={{ color: '#33A0FF' }} />
+                )}
               </IconButton>
             </Tooltip>
-            <Tooltip title="Add to cart">
+            <Tooltip title="Thêm giỏ hàng">
               <IconButton sx={{ color: '#40BFFF' }}>
                 <ShoppingCartIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Xem chi tiết">
+            <Tooltip onClick={onNavigateDetail} title="Xem chi tiết">
               <IconButton sx={{ color: '#40BFFF' }}>
                 <VisibilityIcon />
               </IconButton>

@@ -3,11 +3,19 @@ import { Box, Button, Typography, Container } from '@mui/material';
 import Image from 'next/image'; // Import Next.js Image component
 import adidasImg from '../../public/asset/images/shoes_bg.png';
 
-const AdidasBanner = () => {
+const AdidasBanner = ({
+  isHideButton,
+  height,
+  shoeRatio,
+}: {
+  isHideButton?: boolean;
+  height?: number;
+  shoeRatio?: string;
+}) => {
   return (
     <Box
       sx={{
-        height: '400px', // Adjust height as needed
+        height: height || '400px', // Adjust height as needed
         display: 'flex',
         alignItems: 'center',
         width: '100%',
@@ -21,20 +29,22 @@ const AdidasBanner = () => {
         <Typography variant="body1" color="white" marginBottom={2}>
           Thiết kế đỉnh chóp. Đưa bạn đến giới hạn tối đa.
         </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          sx={{
-            borderRadius: 3,
-            padding: '12px 24px',
-            textTransform: 'none',
-            fontSize: 16,
-            fontWeight: 'bold',
-          }}
-        >
-          Mua Ngay
-        </Button>
+        {isHideButton ? null : (
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            sx={{
+              borderRadius: 3,
+              padding: '12px 24px',
+              textTransform: 'none',
+              fontSize: 16,
+              fontWeight: 'bold',
+            }}
+          >
+            Mua Ngay
+          </Button>
+        )}
       </Container>
 
       <Image
@@ -43,7 +53,7 @@ const AdidasBanner = () => {
         objectFit="cover"
         quality={100}
         style={{
-          width: '40%', // Make the image width responsive
+          width: shoeRatio || '40%', // Make the image width responsive
           height: 'auto', // Maintain aspect ratio
           marginTop: 150,
         }}

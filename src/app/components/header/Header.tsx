@@ -12,6 +12,7 @@ import {
   Typography,
   InputBase,
   Paper,
+  Divider,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -147,18 +148,11 @@ const Header: React.FC = () => {
             </Typography>
           </IconButton>
 
-          {/* Shopping Cart Icon */}
-          <Link
-            href="/cart"
-            underline="none"
-            sx={{ display: 'flex', alignItems: 'center' }}
-          >
-            <IconButton onClick={handleCartClick}>
-              <Badge badgeContent={2} color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
-          </Link>
+          <IconButton onClick={handleCartClick}>
+            <Badge badgeContent={2} color="secondary">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
 
           {/* Search Icon Button */}
           <IconButton sx={{ marginRight: -5 }} onClick={handleSearchClick}>
@@ -200,6 +194,12 @@ const Header: React.FC = () => {
           )}
         </Box>
       </Toolbar>
+      <Divider
+        sx={{
+          width: { xs: '100%' }, // Full width on small screens, 600px on larger screens
+          backgroundColor: '#F6F7F8',
+        }}
+      />
     </AppBar>
   );
 };

@@ -2,6 +2,7 @@
 import { Box, Button, Grid } from '@mui/material';
 import { useState } from 'react';
 import ProductItem from '../productItem';
+import AdidasBanner from '../adidasBanner';
 
 const products = [
   {
@@ -67,7 +68,7 @@ const products = [
   // Add more products for each category
 ];
 
-const cate = [
+const Brand = [
   { categoryName: 'Tất cả', categoryCode: 'All' },
   { categoryName: 'Túi xách', categoryCode: 'Bags' },
   { categoryName: 'Sneakers', categoryCode: 'Sneakers' },
@@ -75,12 +76,8 @@ const cate = [
   { categoryName: 'Mắt kính', categoryCode: 'Glass' },
 ];
 
-const BestSeller = () => {
+const ProductList = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-
-  const handleTabChange = (category: any) => {
-    setSelectedCategory(category);
-  };
 
   // Filter products based on the selected category
   const filteredProducts =
@@ -89,29 +86,7 @@ const BestSeller = () => {
       : products.filter((product) => product.category === selectedCategory);
 
   return (
-    <Box sx={{ paddingX: 12, paddingTop: 10 }}>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          mb: 3,
-          marginBottom: 5,
-        }}
-      >
-        {cate.map((category) => (
-          <Button
-            key={category.categoryCode}
-            variant={
-              selectedCategory === category.categoryCode ? 'contained' : 'text'
-            }
-            onClick={() => handleTabChange(category.categoryCode)}
-            sx={{ mx: 1 }}
-          >
-            {category.categoryName}
-          </Button>
-        ))}
-      </Box>
-
+    <Box>
       {/* Product Grid */}
       <Grid container spacing={5}>
         {filteredProducts.map((product) => (
@@ -130,4 +105,4 @@ const BestSeller = () => {
   );
 };
 
-export default BestSeller;
+export default ProductList;
